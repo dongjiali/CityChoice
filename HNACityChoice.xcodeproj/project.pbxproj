@@ -1,0 +1,518 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD29351618CDD5A300DAFFEA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD29351518CDD5A300DAFFEA /* MapKit.framework */; };
+		CD29351818CDD63700DAFFEA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD29351718CDD63700DAFFEA /* CoreLocation.framework */; };
+		CD9A118418CDA28C00F750B8 /* CityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD9A118318CDA28C00F750B8 /* CityTableViewCell.m */; };
+		CDA73DE118CFF1AD00217EAD /* HNAHandleCityData.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA73DE018CFF1AD00217EAD /* HNAHandleCityData.m */; };
+		CDA73DE518D0008F00217EAD /* cityjson.txt in Resources */ = {isa = PBXBuildFile; fileRef = CDA73DE418D0008F00217EAD /* cityjson.txt */; };
+		CDA9103018CC24ED00ED0D55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9102F18CC24ED00ED0D55 /* Foundation.framework */; };
+		CDA9103218CC24ED00ED0D55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9103118CC24ED00ED0D55 /* CoreGraphics.framework */; };
+		CDA9103418CC24ED00ED0D55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9103318CC24ED00ED0D55 /* UIKit.framework */; };
+		CDA9103A18CC24ED00ED0D55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDA9103818CC24ED00ED0D55 /* InfoPlist.strings */; };
+		CDA9103C18CC24ED00ED0D55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9103B18CC24ED00ED0D55 /* main.m */; };
+		CDA9104018CC24ED00ED0D55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9103F18CC24ED00ED0D55 /* AppDelegate.m */; };
+		CDA9104218CC24ED00ED0D55 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDA9104118CC24ED00ED0D55 /* Images.xcassets */; };
+		CDA9104A18CC24ED00ED0D55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9102F18CC24ED00ED0D55 /* Foundation.framework */; };
+		CDA9104B18CC24ED00ED0D55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9103318CC24ED00ED0D55 /* UIKit.framework */; };
+		CDA9105318CC24ED00ED0D55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDA9105118CC24ED00ED0D55 /* InfoPlist.strings */; };
+		CDA9105518CC24ED00ED0D55 /* HNACityChoiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9105418CC24ED00ED0D55 /* HNACityChoiceTests.m */; };
+		CDA9106118CC256200ED0D55 /* HNACityPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9106018CC256200ED0D55 /* HNACityPicker.m */; };
+		CDA9106718CC476600ED0D55 /* HNACityPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9106618CC476600ED0D55 /* HNACityPickerViewController.m */; };
+		CDC9F2DE18D80D48003580E1 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDC9F2DD18D80D48003580E1 /* CityViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CDA9104C18CC24ED00ED0D55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDA9102418CC24ED00ED0D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDA9102B18CC24ED00ED0D55;
+			remoteInfo = HNACityChoice;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CD29351518CDD5A300DAFFEA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CD29351718CDD63700DAFFEA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CD9A118218CDA28C00F750B8 /* CityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTableViewCell.h; sourceTree = "<group>"; };
+		CD9A118318CDA28C00F750B8 /* CityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTableViewCell.m; sourceTree = "<group>"; };
+		CDA73DDF18CFF1AD00217EAD /* HNAHandleCityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNAHandleCityData.h; sourceTree = "<group>"; };
+		CDA73DE018CFF1AD00217EAD /* HNAHandleCityData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNAHandleCityData.m; sourceTree = "<group>"; };
+		CDA73DE418D0008F00217EAD /* cityjson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cityjson.txt; sourceTree = "<group>"; };
+		CDA9102C18CC24ED00ED0D55 /* HNACityChoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HNACityChoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDA9102F18CC24ED00ED0D55 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CDA9103118CC24ED00ED0D55 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CDA9103318CC24ED00ED0D55 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CDA9103718CC24ED00ED0D55 /* HNACityChoice-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HNACityChoice-Info.plist"; sourceTree = "<group>"; };
+		CDA9103918CC24ED00ED0D55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDA9103B18CC24ED00ED0D55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CDA9103D18CC24ED00ED0D55 /* HNACityChoice-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HNACityChoice-Prefix.pch"; sourceTree = "<group>"; };
+		CDA9103E18CC24ED00ED0D55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CDA9103F18CC24ED00ED0D55 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CDA9104118CC24ED00ED0D55 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CDA9104718CC24ED00ED0D55 /* HNACityChoiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HNACityChoiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDA9105018CC24ED00ED0D55 /* HNACityChoiceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HNACityChoiceTests-Info.plist"; sourceTree = "<group>"; };
+		CDA9105218CC24ED00ED0D55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDA9105418CC24ED00ED0D55 /* HNACityChoiceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HNACityChoiceTests.m; sourceTree = "<group>"; };
+		CDA9105F18CC256200ED0D55 /* HNACityPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNACityPicker.h; sourceTree = "<group>"; };
+		CDA9106018CC256200ED0D55 /* HNACityPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNACityPicker.m; sourceTree = "<group>"; };
+		CDA9106518CC476600ED0D55 /* HNACityPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNACityPickerViewController.h; sourceTree = "<group>"; };
+		CDA9106618CC476600ED0D55 /* HNACityPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNACityPickerViewController.m; sourceTree = "<group>"; };
+		CDC9F2DC18D80D48003580E1 /* CityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityViewController.h; sourceTree = "<group>"; };
+		CDC9F2DD18D80D48003580E1 /* CityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CDA9102918CC24ED00ED0D55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD29351618CDD5A300DAFFEA /* MapKit.framework in Frameworks */,
+				CD29351818CDD63700DAFFEA /* CoreLocation.framework in Frameworks */,
+				CDA9103218CC24ED00ED0D55 /* CoreGraphics.framework in Frameworks */,
+				CDA9103418CC24ED00ED0D55 /* UIKit.framework in Frameworks */,
+				CDA9103018CC24ED00ED0D55 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDA9104418CC24ED00ED0D55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA9104B18CC24ED00ED0D55 /* UIKit.framework in Frameworks */,
+				CDA9104A18CC24ED00ED0D55 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CDA9102318CC24ED00ED0D55 = {
+			isa = PBXGroup;
+			children = (
+				CDA9103518CC24ED00ED0D55 /* HNACityChoice */,
+				CDA9104E18CC24ED00ED0D55 /* HNACityChoiceTests */,
+				CDA9102E18CC24ED00ED0D55 /* Frameworks */,
+				CDA9102D18CC24ED00ED0D55 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CDA9102D18CC24ED00ED0D55 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDA9102C18CC24ED00ED0D55 /* HNACityChoice.app */,
+				CDA9104718CC24ED00ED0D55 /* HNACityChoiceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDA9102E18CC24ED00ED0D55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD29351718CDD63700DAFFEA /* CoreLocation.framework */,
+				CD29351518CDD5A300DAFFEA /* MapKit.framework */,
+				CDA9102F18CC24ED00ED0D55 /* Foundation.framework */,
+				CDA9103118CC24ED00ED0D55 /* CoreGraphics.framework */,
+				CDA9103318CC24ED00ED0D55 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDA9103518CC24ED00ED0D55 /* HNACityChoice */ = {
+			isa = PBXGroup;
+			children = (
+				CDA9105E18CC24F600ED0D55 /* hnaCityPicker */,
+				CDA9103E18CC24ED00ED0D55 /* AppDelegate.h */,
+				CDA9103F18CC24ED00ED0D55 /* AppDelegate.m */,
+				CDC9F2DC18D80D48003580E1 /* CityViewController.h */,
+				CDC9F2DD18D80D48003580E1 /* CityViewController.m */,
+				CDA9104118CC24ED00ED0D55 /* Images.xcassets */,
+				CDA9103618CC24ED00ED0D55 /* Supporting Files */,
+			);
+			path = HNACityChoice;
+			sourceTree = "<group>";
+		};
+		CDA9103618CC24ED00ED0D55 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDA73DE418D0008F00217EAD /* cityjson.txt */,
+				CDA9103718CC24ED00ED0D55 /* HNACityChoice-Info.plist */,
+				CDA9103818CC24ED00ED0D55 /* InfoPlist.strings */,
+				CDA9103B18CC24ED00ED0D55 /* main.m */,
+				CDA9103D18CC24ED00ED0D55 /* HNACityChoice-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDA9104E18CC24ED00ED0D55 /* HNACityChoiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDA9105418CC24ED00ED0D55 /* HNACityChoiceTests.m */,
+				CDA9104F18CC24ED00ED0D55 /* Supporting Files */,
+			);
+			path = HNACityChoiceTests;
+			sourceTree = "<group>";
+		};
+		CDA9104F18CC24ED00ED0D55 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDA9105018CC24ED00ED0D55 /* HNACityChoiceTests-Info.plist */,
+				CDA9105118CC24ED00ED0D55 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDA9105E18CC24F600ED0D55 /* hnaCityPicker */ = {
+			isa = PBXGroup;
+			children = (
+				CDA9105F18CC256200ED0D55 /* HNACityPicker.h */,
+				CDA9106018CC256200ED0D55 /* HNACityPicker.m */,
+				CDA9106518CC476600ED0D55 /* HNACityPickerViewController.h */,
+				CDA9106618CC476600ED0D55 /* HNACityPickerViewController.m */,
+				CD9A118218CDA28C00F750B8 /* CityTableViewCell.h */,
+				CD9A118318CDA28C00F750B8 /* CityTableViewCell.m */,
+				CDA73DDF18CFF1AD00217EAD /* HNAHandleCityData.h */,
+				CDA73DE018CFF1AD00217EAD /* HNAHandleCityData.m */,
+			);
+			name = hnaCityPicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDA9102B18CC24ED00ED0D55 /* HNACityChoice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDA9105818CC24ED00ED0D55 /* Build configuration list for PBXNativeTarget "HNACityChoice" */;
+			buildPhases = (
+				CDA9102818CC24ED00ED0D55 /* Sources */,
+				CDA9102918CC24ED00ED0D55 /* Frameworks */,
+				CDA9102A18CC24ED00ED0D55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HNACityChoice;
+			productName = HNACityChoice;
+			productReference = CDA9102C18CC24ED00ED0D55 /* HNACityChoice.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CDA9104618CC24ED00ED0D55 /* HNACityChoiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDA9105B18CC24ED00ED0D55 /* Build configuration list for PBXNativeTarget "HNACityChoiceTests" */;
+			buildPhases = (
+				CDA9104318CC24ED00ED0D55 /* Sources */,
+				CDA9104418CC24ED00ED0D55 /* Frameworks */,
+				CDA9104518CC24ED00ED0D55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDA9104D18CC24ED00ED0D55 /* PBXTargetDependency */,
+			);
+			name = HNACityChoiceTests;
+			productName = HNACityChoiceTests;
+			productReference = CDA9104718CC24ED00ED0D55 /* HNACityChoiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CDA9102418CC24ED00ED0D55 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = HNACityChoice;
+				TargetAttributes = {
+					CDA9104618CC24ED00ED0D55 = {
+						TestTargetID = CDA9102B18CC24ED00ED0D55;
+					};
+				};
+			};
+			buildConfigurationList = CDA9102718CC24ED00ED0D55 /* Build configuration list for PBXProject "HNACityChoice" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CDA9102318CC24ED00ED0D55;
+			productRefGroup = CDA9102D18CC24ED00ED0D55 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDA9102B18CC24ED00ED0D55 /* HNACityChoice */,
+				CDA9104618CC24ED00ED0D55 /* HNACityChoiceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CDA9102A18CC24ED00ED0D55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA73DE518D0008F00217EAD /* cityjson.txt in Resources */,
+				CDA9103A18CC24ED00ED0D55 /* InfoPlist.strings in Resources */,
+				CDA9104218CC24ED00ED0D55 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDA9104518CC24ED00ED0D55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA9105318CC24ED00ED0D55 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CDA9102818CC24ED00ED0D55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA73DE118CFF1AD00217EAD /* HNAHandleCityData.m in Sources */,
+				CDA9104018CC24ED00ED0D55 /* AppDelegate.m in Sources */,
+				CD9A118418CDA28C00F750B8 /* CityTableViewCell.m in Sources */,
+				CDC9F2DE18D80D48003580E1 /* CityViewController.m in Sources */,
+				CDA9106718CC476600ED0D55 /* HNACityPickerViewController.m in Sources */,
+				CDA9106118CC256200ED0D55 /* HNACityPicker.m in Sources */,
+				CDA9103C18CC24ED00ED0D55 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDA9104318CC24ED00ED0D55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDA9105518CC24ED00ED0D55 /* HNACityChoiceTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDA9104D18CC24ED00ED0D55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDA9102B18CC24ED00ED0D55 /* HNACityChoice */;
+			targetProxy = CDA9104C18CC24ED00ED0D55 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CDA9103818CC24ED00ED0D55 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDA9103918CC24ED00ED0D55 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CDA9105118CC24ED00ED0D55 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDA9105218CC24ED00ED0D55 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CDA9105618CC24ED00ED0D55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "16014BA0-2273-4473-9DC3-372CE32BDE79";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CDA9105718CC24ED00ED0D55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "16014BA0-2273-4473-9DC3-372CE32BDE79";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDA9105918CC24ED00ED0D55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HNACityChoice/HNACityChoice-Prefix.pch";
+				INFOPLIST_FILE = "HNACityChoice/HNACityChoice-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "16014BA0-2273-4473-9DC3-372CE32BDE79";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CDA9105A18CC24ED00ED0D55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Weifeng Hou  (29ZM7QR36G)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HNACityChoice/HNACityChoice-Prefix.pch";
+				INFOPLIST_FILE = "HNACityChoice/HNACityChoice-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "16014BA0-2273-4473-9DC3-372CE32BDE79";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CDA9105C18CC24ED00ED0D55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HNACityChoice.app/HNACityChoice";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HNACityChoice/HNACityChoice-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HNACityChoiceTests/HNACityChoiceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CDA9105D18CC24ED00ED0D55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HNACityChoice.app/HNACityChoice";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HNACityChoice/HNACityChoice-Prefix.pch";
+				INFOPLIST_FILE = "HNACityChoiceTests/HNACityChoiceTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CDA9102718CC24ED00ED0D55 /* Build configuration list for PBXProject "HNACityChoice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDA9105618CC24ED00ED0D55 /* Debug */,
+				CDA9105718CC24ED00ED0D55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDA9105818CC24ED00ED0D55 /* Build configuration list for PBXNativeTarget "HNACityChoice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDA9105918CC24ED00ED0D55 /* Debug */,
+				CDA9105A18CC24ED00ED0D55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDA9105B18CC24ED00ED0D55 /* Build configuration list for PBXNativeTarget "HNACityChoiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDA9105C18CC24ED00ED0D55 /* Debug */,
+				CDA9105D18CC24ED00ED0D55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CDA9102418CC24ED00ED0D55 /* Project object */;
+}

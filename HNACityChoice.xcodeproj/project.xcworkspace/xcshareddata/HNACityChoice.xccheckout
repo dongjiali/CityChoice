@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B2E7DC62-DED8-4271-8FBD-444FA28D6F4A</string>
+	<string>6C5170C6-19EA-465B-8AD7-C2D76A8EA83C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>HNACityChoice</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>F7FE705C-237A-4BA1-A34D-30450A415BA3</key>
-		<string>https://github.com/dongjiali/HNACityChoice.git</string>
+		<key>06BD6AFC-2B1D-4517-841E-FFA422545730</key>
+		<string>https://github.com/dongjiali/CityChoice.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>HNACityChoice.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>F7FE705C-237A-4BA1-A34D-30450A415BA3</key>
+		<key>06BD6AFC-2B1D-4517-841E-FFA422545730</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/dongjiali/HNACityChoice.git</string>
+	<string>https://github.com/dongjiali/CityChoice.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>F7FE705C-237A-4BA1-A34D-30450A415BA3</string>
+	<string>06BD6AFC-2B1D-4517-841E-FFA422545730</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F7FE705C-237A-4BA1-A34D-30450A415BA3</string>
+			<string>06BD6AFC-2B1D-4517-841E-FFA422545730</string>
 			<key>IDESourceControlWCCName</key>
-			<string>HNACityChoice</string>
+			<string>CityChoice</string>
 		</dict>
 	</array>
 </dict>

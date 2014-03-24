@@ -138,29 +138,23 @@ const CGFloat CityButtonHeight = 40.0f;
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-
-        self.activityIndicatorView=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 0, 30, self.frame.size.height)];
-        self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        [self.contentView addSubview:self.activityIndicatorView];
-        //预定计时器
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(stop) userInfo:nil repeats:NO];
+        [self startLocationManager];
         //添加BUTTON
         [self addReloadButton];
     }
     return self;
 }
 
-- (void)locationCityText:(BOOL)location;
+- (void)locationCityText;
 {
-    if (!location) {
         [self startLocationManager];
-    }
 }
 
 - (void)startLocationManager
 {
     self.textLabel.text = @"开始定位...";
-    if ( self.locationManager == nil) {
+    reloadButton.hidden = YES;
+    if (!self.locationManager) {
         //开始定位
         if([CLLocationManager locationServicesEnabled])
         {
@@ -169,10 +163,18 @@ const CGFloat CityButtonHeight = 40.0f;
             [self.locationManager startUpdatingLocation];
         }
     }
+    if (!self.activityIndicatorView) {
+        self.activityIndicatorView=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(100, 0, 30, self.frame.size.height)];
+        self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+        [self.contentView addSubview:self.activityIndicatorView];
+    }
+    //预定计时器
+    if (!self.timer) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(stop) userInfo:nil repeats:NO];
+    }
+    
     //菊花开始转
     [self.activityIndicatorView startAnimating];
-    //启动即使器
-    [self.timer fireDate];
 }
 
 - (void)stop
@@ -187,15 +189,19 @@ const CGFloat CityButtonHeight = 40.0f;
 - (void)stopLocationService
 {
     if (self.locationManager) {
+        [self.locationManager stopUpdatingLocation];
+        [self.locationManager stopUpdatingHeading];
         self.locationManager = nil;
     }
     //停菊花
     if ([self.activityIndicatorView isAnimating]) {
         [self.activityIndicatorView stopAnimating];
+        self.activityIndicatorView = nil;
     }
     //停定时
     if (self.timer && self.timer.isValid) {
         [self.timer invalidate];
+        self.timer = nil;
     }
 }
 

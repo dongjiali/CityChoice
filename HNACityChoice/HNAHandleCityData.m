@@ -16,9 +16,11 @@
     NSString *cityFileName = nil;
     if (cityTypeMode == 0) {
         cityFileName = @"cityjson";
+        self.arrayHotCity = [NSMutableArray arrayWithArray: @[@"北京",@"上海",@"广州",@"海口",@"深圳",@"成都",@"杭州",@"重庆",@"厦门"]];
     }else
     {
         cityFileName = @"cityjson";
+         self.arrayHotCity = [NSMutableArray arrayWithArray: @[@"纽约",@"旧金山",@"东京",@"釜山",@"新加坡",@"柏林"]];
     }
     NSString *filePath = [[NSBundle mainBundle]pathForResource:cityFileName ofType:@"txt"];
     //转码

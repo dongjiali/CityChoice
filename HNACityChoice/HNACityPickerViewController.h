@@ -43,4 +43,8 @@ typedef void (^SelectedCityBolck)(NSString *cityName);
 @property (nonatomic, strong) NSMutableArray *searchResults;
 //英文提示数据
 @property (nonatomic, strong) NSMutableArray *indexArray;
+
+@property (nonatomic,strong) NSArray *handleDomesticCity;
+
+@property (nonatomic,strong) NSArray *handleInternationalCity;
 @end

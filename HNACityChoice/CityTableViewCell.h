@@ -45,5 +45,5 @@ typedef void (^blockLocation)(NSString *locationString ,BOOL tag);
 //定时服务
 @property (nonatomic, strong)NSTimer *timer;
 //定位
-- (void)locationCityText:(BOOL)location;
+- (void)locationCityText;
 @end

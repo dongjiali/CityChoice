@@ -16,8 +16,6 @@
 static float hotCityCellHeight = 0;
 @interface HNACityPickerViewController ()
 {
-    HNAHandleCityData *handleDomesticCity;
-    HNAHandleCityData *handleInternationalCity;
     //分组数
     NSInteger numberOfSections;
     //每组数量
@@ -107,14 +105,18 @@ static float hotCityCellHeight = 0;
 - (void)addLocationCellView
 {
     if (!locationcity) {
-        locationcity = [[LocationCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        locationcity = [[LocationCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Locationcell"];
+        [locationcity requireLocationTexg:^(NSString *locationString, BOOL tag) {
+            self.locationText = locationString;
+            locationTag = tag;
+        }];
     }
 }
 
 - (void)addHotCityCellView
 {
     if (!hotcity) {
-        hotcity = [[HotCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        hotcity = [[HotCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HotCitycell"];
         hotcity.cityArray = self.HotCityArray;
         [hotcity requireHotCityname:^(NSString *cityName) {
             NSLog(@"%@",cityName);
@@ -128,6 +130,7 @@ static float hotCityCellHeight = 0;
 - (void)setGroupTextAndCount:(UITableView *)tableView section:(NSInteger)section
 {
     heightForRow = 44;
+    numberOfRows = 1;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         numberOfRows = self.searchResults.count;
         tableHeaderColor = [UIColor blackColor];
@@ -135,14 +138,11 @@ static float hotCityCellHeight = 0;
     }else {
         switch (section) {
             case SectionMylocation:
-                numberOfRows = 1;
                 self.headerText = @"当前城市";
                 tableHeaderColor = [UIColor redColor];
                 break;
             case SectionHotCity:
-//                numberOfRows = self.HotCityArray.count;
                 heightForRow = hotCityCellHeight;
-                numberOfRows = 1;
                 self.headerText = @"热门城市";
                 tableHeaderColor = [UIColor redColor];
                 break;
@@ -183,26 +183,23 @@ static float hotCityCellHeight = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
         cell.textLabel.text = self.searchResults[indexPath.row];
     }else
     switch (indexPath.section) {
         case SectionMylocation:{
             //初始化定位CELL
-            if (!locationTag) {
-                [locationcity requireLocationTexg:^(NSString *locationString, BOOL tag) {
-                    locationcity.textLabel.text = locationString;
-                    self.locationText = locationString;
-                    locationTag = tag;
-                }];
+            if (locationcity) {
+                cell = locationcity;
             }
-            cell =  locationcity;
         }
             break;
         case SectionHotCity:{
@@ -213,9 +210,6 @@ static float hotCityCellHeight = 0;
             break;
         default:
         {
-            if (cell == locationcity || cell == hotcity) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
             NSArray *currentItems = self.dataArray[indexPath.section - 2];
             NSString *category = ((City *)currentItems[indexPath.row]).cityNAme;
             cell.textLabel.text = category;
@@ -239,8 +233,8 @@ static float hotCityCellHeight = 0;
     NSString *cityName = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
-        NSLog(@"%@",self.searchResults[indexPath.section]);
-        cityName = self.searchResults[indexPath.section];
+        NSLog(@"%@",self.searchResults[indexPath.row]);
+        cityName = self.searchResults[indexPath.row];
     }
     else{
         if (indexPath.section == 0) {
@@ -320,25 +314,21 @@ static float hotCityCellHeight = 0;
 #pragma mark- get datas
 - (void)refreshDomesticCityTableCityDate
 {
-    if (!handleDomesticCity) {
-        handleDomesticCity = [[HNAHandleCityData alloc]init];
-        [handleDomesticCity cityDataDidHandled:CityTypeModeDomestic];
+    if (!self.handleDomesticCity) {
+       HNAHandleCityData *domesticdate = [[HNAHandleCityData alloc]init];
+        [domesticdate cityDataDidHandled:CityTypeModeDomestic];
+        self.handleDomesticCity = [NSArray arrayWithObjects:domesticdate.arrayForArrays,domesticdate.sectionHeadsKeys,domesticdate.arrayHotCity, nil];
     }
-    self.dataArray = handleDomesticCity.arrayForArrays;
-    self.indexArray =  handleDomesticCity.sectionHeadsKeys;
-    self.HotCityArray = @[@"北京",@"上海虹桥",@"上海浦东",@"广州",@"海口",@"深圳",@"成都",@"杭州",@"重庆",@"厦门",@"昆明"];
 }
 
 
 - (void)refreshInternationalTableCityDate
 {
-    if (!handleInternationalCity) {
-        handleInternationalCity = [[HNAHandleCityData alloc]init];
-        [handleInternationalCity cityDataDidHandled:CityTypeModeInternational];
+    if (!self.handleInternationalCity) {
+        HNAHandleCityData *internationaldate = [[HNAHandleCityData alloc]init];
+        [internationaldate cityDataDidHandled:CityTypeModeInternational];
+        self.handleInternationalCity = [NSArray arrayWithObjects:internationaldate.arrayForArrays,internationaldate.sectionHeadsKeys,internationaldate.arrayHotCity, nil];
     }
-    self.dataArray = handleInternationalCity.arrayForArrays;
-    self.indexArray =  handleInternationalCity.sectionHeadsKeys;
-    self.HotCityArray =  @[@"纽约",@"旧金山",@"东京",@"釜山",@"新加坡",@"柏林"];
 }
 
 #pragma mark- refresh UITableView
@@ -348,9 +338,15 @@ static float hotCityCellHeight = 0;
     switch (Index) {
         case 0:
             [self refreshDomesticCityTableCityDate];
+            self.dataArray = self.handleDomesticCity[0];
+            self.indexArray = self.handleDomesticCity[1];
+            self.HotCityArray = self.handleDomesticCity[2];
             break;
         case 1:
             [self refreshInternationalTableCityDate];
+            self.dataArray = self.handleInternationalCity[0];
+            self.indexArray = self.handleInternationalCity[1];
+            self.HotCityArray = self.handleInternationalCity[2];
             break;
     }
     [self TableviewReloadData];
@@ -358,7 +354,7 @@ static float hotCityCellHeight = 0;
     [self.tableview reloadData];
     //切换tableViw 添加动画
     CATransition *animation = [CATransition animation];
-    [animation setDuration:1.0f];
+    [animation setDuration:.5f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [animation setType:kCATransitionFade];
     [animation setSubtype:kCATransitionFromBottom];
@@ -384,7 +380,6 @@ static float hotCityCellHeight = 0;
     //刷新定位cell试图
     //creat定位cell试图
     [self addLocationCellView];
-    [locationcity locationCityText:locationTag];
     //添加热门城市视图
     [self addHotCityCellView];
     //刷新热门城市视图

@@ -12,18 +12,12 @@
 
 #define SearchBarHeight 44
 #define SegmentedHeight 20
+#define TABLEVIEWCELLHEIGHT 44
+#define TABLEVIEWCELLCOUNT 1
 
 static float hotCityCellHeight = 0;
 @interface HNACityPickerViewController ()
 {
-    //分组数
-    NSInteger numberOfSections;
-    //每组数量
-    NSInteger numberOfRows;
-    //头高
-    CGFloat heightForRow;
-    //分组头的颜色
-    UIColor *tableHeaderColor;
     //定位城市cell
     LocationCityTableViewCell *locationcity;
     //热门城市cell
@@ -52,7 +46,6 @@ static float hotCityCellHeight = 0;
     //添加搜索栏
     self.searchBarView = [[UISearchBar alloc]init];
     self.searchBarView.delegate = self;
-    self.searchBarView.placeholder = @"北/北京/bei/beijing";
     [self.view addSubview:self.searchBarView];
     
     [self.searchBarView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -63,8 +56,10 @@ static float hotCityCellHeight = 0;
    
     self.searchDisplay = [[UISearchDisplayController alloc]initWithSearchBar:self.searchBarView contentsController:self];
     self.searchDisplay.active = NO;
-    self.searchDisplay.searchResultsDataSource = self;
-    self.searchDisplay.searchResultsDelegate = self;
+    [self.searchDisplay setDelegate:self];
+    [self.searchDisplay setSearchResultsDelegate:self];
+    [self.searchDisplay setSearchResultsDataSource:self];
+    
     //添加选项卡栏
     NSArray *segmentedarray = @[@"国 内",@"国 际"];
     self.segmentedView = [[UISegmentedControl alloc]initWithItems:segmentedarray];
@@ -85,7 +80,6 @@ static float hotCityCellHeight = 0;
     self.tableview = [[UITableView alloc]init];
     [self.view addSubview:self.tableview];
     [self.tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.tableview registerClass:[UITableViewCell class]forCellReuseIdentifier:@"cell"];
     [self.tableview registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"header"];
     self.tableview.dataSource = self;
     self.tableview.delegate = self;
@@ -96,9 +90,10 @@ static float hotCityCellHeight = 0;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.tableview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
 
     //iOS7 Only: We don't want the calendar to go below the status bar (&navbar if there is one).
-    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+        self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight;
+    else
+        [self respondsToSelector:@selector(edgesForExtendedLayout)];
 }
 
 #pragma -mark AddCellView
@@ -117,81 +112,103 @@ static float hotCityCellHeight = 0;
 {
     if (!hotcity) {
         hotcity = [[HotCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HotCitycell"];
-        hotcity.cityArray = self.HotCityArray;
         [hotcity requireHotCityname:^(NSString *cityName) {
-            NSLog(@"%@",cityName);
             _block(cityName);
         }];
     }
 }
 
+- (UITableViewCell *)addSearchTableCellView:(NSString *)CellIdentifier
+{
+    UITableViewCell *cell = [self.tableview dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSLog(@"%@",CellIdentifier);
+    }
+    return cell;
+}
+
 #pragma -mark InitCityDataNumber
 // 设置每个分组分类的text和反回数据
-- (void)setGroupTextAndCount:(UITableView *)tableView section:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    heightForRow = 44;
-    numberOfRows = 1;
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        numberOfRows = self.searchResults.count;
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+    UIColor *tableHeaderColor;
+    NSString *headerText;
+    if ([self changeTableViewSearch:tableView]) {
         tableHeaderColor = [UIColor blackColor];
-        self.headerText = @"结果";
+        headerText = @"结果";
     }else {
         switch (section) {
             case SectionMylocation:
-                self.headerText = @"当前城市";
+                headerText = @"当前城市";
                 tableHeaderColor = [UIColor redColor];
                 break;
             case SectionHotCity:
-                heightForRow = hotCityCellHeight;
-                self.headerText = @"热门城市";
+                headerText = @"热门城市";
                 tableHeaderColor = [UIColor redColor];
                 break;
             default:
-                numberOfRows = [self.dataArray[section - 2]count];
-                self.headerText = self.indexArray[section - 2];
+                headerText = self.indexArray[section-2];
                 tableHeaderColor = [UIColor blackColor];
                 break;
         }
     }
+    headerView.textLabel.textColor = tableHeaderColor;
+    self.headerText = headerText;
+    headerView.textLabel.text = headerText;
+    return headerView;
 }
+
 
 # pragma mark- TableView datasource methods
 
+#pragma -mark- TableView delegate
+//每组
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView == self.searchDisplayController.searchResultsTableView)
-        //搜索结果时 只返回一组
-        numberOfSections = 1;
-    else
-        //回一城市数组+我的位+热门城市
-        numberOfSections = self.dataArray.count +2;
-    return numberOfSections;
+    if (![self changeTableViewSearch:tableView]) {
+        return self.dataArray.count + 2;
+    }
+    return TABLEVIEWCELLCOUNT;
 }
-
+//每组的行
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    [self setGroupTextAndCount:tableView section:section];
-    return numberOfRows;
+    if ([self changeTableViewSearch:tableView]) {
+        return self.searchResults.count;
+    }
+    if (section >= 2) {
+        return [self.dataArray[section - 2]count];
+    }
+    return TABLEVIEWCELLCOUNT;
 }
-
+//行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self setGroupTextAndCount:tableView section:indexPath.section];
-    return heightForRow;
+    if (![self changeTableViewSearch:tableView]) {
+        if (indexPath.section == 1) {
+            return hotCityCellHeight;
+        }
+    }
+    return TABLEVIEWCELLHEIGHT;
 }
 
+//设置表格的索引数组
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    if ([self changeTableViewSearch:tableView]) {
+        return nil;
+    }
+    return self.indexArray;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    UITableViewCell *cell;
+    if ([self changeTableViewSearch:tableView]) {
+        cell = [self addSearchTableCellView:@"SearchCell"];
         cell.textLabel.text = self.searchResults[indexPath.row];
     }else
     switch (indexPath.section) {
@@ -210,6 +227,7 @@ static float hotCityCellHeight = 0;
             break;
         default:
         {
+            cell = [self addSearchTableCellView:@"Cell"];
             NSArray *currentItems = self.dataArray[indexPath.section - 2];
             NSString *category = ((City *)currentItems[indexPath.row]).cityNAme;
             cell.textLabel.text = category;
@@ -220,27 +238,17 @@ static float hotCityCellHeight = 0;
     return cell;
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    [self setGroupTextAndCount:tableView section:section];
-    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-    headerView.textLabel.textColor = tableHeaderColor;
-    return headerView;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cityName = nil;
-    if (tableView == self.searchDisplayController.searchResultsTableView)
+    if ([self changeTableViewSearch:tableView])
     {
-        NSLog(@"%@",self.searchResults[indexPath.row]);
         cityName = self.searchResults[indexPath.row];
     }
     else{
         if (indexPath.section == 0) {
             if (locationTag) {
                 cityName = self.locationText;
-                NSLog(@"%@",self.locationText);
                 _block(cityName);
             }
             return;
@@ -248,10 +256,10 @@ static float hotCityCellHeight = 0;
         {
         NSArray *currentItems = self.dataArray[indexPath.section - 2];
         NSString *category = ((City *)currentItems[indexPath.row]).cityNAme;
-        NSLog(@"%@",category);
         cityName = category;
         }
     }
+    //返回选择城市
     _block(cityName);
 }
 
@@ -260,18 +268,17 @@ static float hotCityCellHeight = 0;
     return self.headerText;
 }
 
-//设置表格的索引数组
--(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    return self.indexArray;
-}
-
 #pragma mark- UISearchDisplayDelegate
 
+-(void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView
+{
+    [tableView setContentInset:UIEdgeInsetsZero];
+    [tableView setScrollIndicatorInsets:UIEdgeInsetsZero];
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.searchResults = [[NSMutableArray alloc]init];
-    searchText = self.searchBarView.text;
-    
+    self.searchResults = [NSMutableArray array];
+    [self.tableview setContentSize:CGSizeMake(0, 0)];
     if (searchText.length > 0 && ![self isIncludeChineseInString:searchText]) {
         for (NSArray *array in self.dataArray) {
             for (City *city in array) {
@@ -317,7 +324,7 @@ static float hotCityCellHeight = 0;
     if (!self.handleDomesticCity) {
        HNAHandleCityData *domesticdate = [[HNAHandleCityData alloc]init];
         [domesticdate cityDataDidHandled:CityTypeModeDomestic];
-        self.handleDomesticCity = [NSArray arrayWithObjects:domesticdate.arrayForArrays,domesticdate.sectionHeadsKeys,domesticdate.arrayHotCity, nil];
+        self.handleDomesticCity = [NSArray arrayWithObjects:domesticdate.arrayForArrays,domesticdate.sectionHeadsKeys,domesticdate.arrayHotCity,domesticdate.searchText, nil];
     }
 }
 
@@ -327,7 +334,7 @@ static float hotCityCellHeight = 0;
     if (!self.handleInternationalCity) {
         HNAHandleCityData *internationaldate = [[HNAHandleCityData alloc]init];
         [internationaldate cityDataDidHandled:CityTypeModeInternational];
-        self.handleInternationalCity = [NSArray arrayWithObjects:internationaldate.arrayForArrays,internationaldate.sectionHeadsKeys,internationaldate.arrayHotCity, nil];
+        self.handleInternationalCity = [NSArray arrayWithObjects:internationaldate.arrayForArrays,internationaldate.sectionHeadsKeys,internationaldate.arrayHotCity,internationaldate.searchText,nil];
     }
 }
 
@@ -341,20 +348,21 @@ static float hotCityCellHeight = 0;
             self.dataArray = self.handleDomesticCity[0];
             self.indexArray = self.handleDomesticCity[1];
             self.HotCityArray = self.handleDomesticCity[2];
+            self.searchBarView.placeholder = self.handleDomesticCity[3];
             break;
         case 1:
             [self refreshInternationalTableCityDate];
             self.dataArray = self.handleInternationalCity[0];
             self.indexArray = self.handleInternationalCity[1];
             self.HotCityArray = self.handleInternationalCity[2];
+            self.searchBarView.placeholder = self.handleInternationalCity[3];
             break;
     }
     [self TableviewReloadData];
-
     [self.tableview reloadData];
     //切换tableViw 添加动画
     CATransition *animation = [CATransition animation];
-    [animation setDuration:.5f];
+    [animation setDuration:.3f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [animation setType:kCATransitionFade];
     [animation setSubtype:kCATransitionFromBottom];
@@ -365,20 +373,17 @@ static float hotCityCellHeight = 0;
 {
     
     //根据热门城市个数求高度
-    NSInteger cellheightnum = 0;
+    NSInteger cellheightnum = self.HotCityArray.count / 3;
     CGFloat cellheightsum = 0;
     if (self.HotCityArray.count%3 > 0 ) {
-        cellheightnum = self.HotCityArray.count / 3;
         cellheightsum = 5.0 *cellheightnum + 40 * (cellheightnum +1);
     }
     else
     {
-        cellheightnum = self.HotCityArray.count / 3;
         cellheightsum = 5.0 *(cellheightnum -1 )+ 40 * cellheightnum;
     }
     hotCityCellHeight = 20 + cellheightsum;
     //刷新定位cell试图
-    //creat定位cell试图
     [self addLocationCellView];
     //添加热门城市视图
     [self addHotCityCellView];
@@ -387,7 +392,13 @@ static float hotCityCellHeight = 0;
     [hotcity refreshHotCiytDatas:hotCityCellHeight];
 }
 
-#pragma -mark- block数据
+#pragma -mark- change TableView Search
+- (BOOL)changeTableViewSearch:(UITableView *)tableview
+{
+    return [tableview isEqual:self.searchDisplayController.searchResultsTableView];
+}
+
+#pragma -mark- block
 - (void)selectedCityName:(SelectedCityBolck)block
 {
     _block = [block copy];

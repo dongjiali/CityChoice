@@ -15,14 +15,13 @@ typedef enum SectionTypeMode {
 typedef void (^SelectedCityBolck)(NSString *cityName);
 
 #import <UIKit/UIKit.h>
-@interface HNACityPickerViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface HNACityPickerViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
 {
     SelectedCityBolck _block;
 }
 //反回选择的热门城市
 - (void)selectedCityName:(SelectedCityBolck)block;
-//tabview头view
-@property (nonatomic, strong)UIView *tableHeaderView;
+
 //搜索
 @property (nonatomic, strong)UISearchBar *searchBarView;
 //选项卡
@@ -43,8 +42,8 @@ typedef void (^SelectedCityBolck)(NSString *cityName);
 @property (nonatomic, strong) NSMutableArray *searchResults;
 //英文提示数据
 @property (nonatomic, strong) NSMutableArray *indexArray;
-
+//国内城市
 @property (nonatomic,strong) NSArray *handleDomesticCity;
-
+//国际城市
 @property (nonatomic,strong) NSArray *handleInternationalCity;
 @end

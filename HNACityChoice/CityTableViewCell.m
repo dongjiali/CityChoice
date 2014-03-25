@@ -227,8 +227,6 @@ const CGFloat CityButtonHeight = 40.0f;
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *array, NSError *error)
      {
-         //停止菊花和定位
-         [self stopLocationService];
          //定位完成获取城市
          if (array.count > 0)
          {
@@ -241,21 +239,16 @@ const CGFloat CityButtonHeight = 40.0f;
              _blocklocation(city,YES);
              reloadButton.hidden = YES;
          }
-         else if (error == nil && [array count] == 0)
+         if (error == nil && [array count] == 0)
          {
              NSString *locationText = @"定位失败,请重试";
              _blocklocation(locationText,NO);
              self.textLabel.text = locationText;
              reloadButton.hidden = NO;
          }
-         else if (error != nil)
-         {
-             NSString *locationText = @"定位失败,请检查网络";
-             _blocklocation(locationText,NO);
-             reloadButton.hidden = NO;
-             self.textLabel.text = locationText;
-         }
-     }];  
+         //停止菊花和定位
+         [self stopLocationService];
+     }];
 }
 @end
 

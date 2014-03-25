@@ -16,6 +16,7 @@ typedef enum CityTypeMode
 
 @interface HNAHandleCityData : NSObject
 
+@property (nonatomic ,strong)NSString *searchText;
 @property (nonatomic ,strong)NSMutableArray *storeCities;  //存放所有封装好的城市信息
 @property (nonatomic ,strong)NSMutableArray * sectionHeadsKeys;//存放所有城市的开头字母，相同剔除
 @property (nonatomic ,strong)NSMutableArray *arrayForArrays;   //存放所有按字母分组好的城市信息

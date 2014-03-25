@@ -179,7 +179,6 @@ const CGFloat CityButtonHeight = 40.0f;
 
 - (void)stop
 {
-    NSLog(@"10 seconds forward stop");
     _blocklocation(@"定位失败,请重试",NO);
     self.textLabel.text = @"定位失败,请重试";
     reloadButton.hidden = NO;

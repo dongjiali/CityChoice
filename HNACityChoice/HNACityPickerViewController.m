@@ -121,6 +121,9 @@ static float hotCityCellHeight = 0;
 - (UITableViewCell *)addSearchTableCellView:(NSString *)CellIdentifier
 {
     UITableViewCell *cell = [self.tableview dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [self.searchDisplayController.searchResultsTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -362,7 +365,7 @@ static float hotCityCellHeight = 0;
     [self.tableview reloadData];
     //切换tableViw 添加动画
     CATransition *animation = [CATransition animation];
-    [animation setDuration:.3f];
+    [animation setDuration:.4f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [animation setType:kCATransitionFade];
     [animation setSubtype:kCATransitionFromBottom];

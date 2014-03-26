@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HNACityPicker.h"
-@interface CityViewController : UIViewController<CityPickerDelegate>
+@interface CityViewController : UIViewController
 
 @end

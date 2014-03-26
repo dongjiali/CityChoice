@@ -12,6 +12,7 @@
 {
     HNACityPickerViewController *CityPicker;
 }
+@property (readwrite, nonatomic, copy)selectedCityBolck cityBlock;
 @end
 
 @implementation HNACityPicker
@@ -30,9 +31,10 @@
     CityPicker = [[HNACityPickerViewController alloc]init];
 //    CityPicker.delegate = self;
     if (self = [super initWithRootViewController:CityPicker]) {
-        [CityPicker selectedCityName:^(NSString *cityName) {
-            if (self.cityDelegate) {
-                [self.cityDelegate selectedCityisName:cityName];
+        [CityPicker resultCityName:^(NSString *cityName) {
+            if (_cityBlock)
+            {
+                _cityBlock(cityName);
                 [self backController];
             }
         }];
@@ -44,6 +46,11 @@
         CityPicker.navigationItem.leftBarButtonItem = backController;
     }
     return self;
+}
+
+- (void)selectedCityisName:(selectedCityBolck)block
+{
+    _cityBlock = block;
 }
 
 - (void)backController

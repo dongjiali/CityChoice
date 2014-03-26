@@ -24,8 +24,8 @@ static float hotCityCellHeight = 0;
     HotCityTableViewCell *hotcity;
     //定位成功标签
     BOOL locationTag;
-
 }
+@property (readwrite, nonatomic, copy)ResultCityBolck resultBlock;
 @end
 
 @implementation HNACityPickerViewController
@@ -113,7 +113,7 @@ static float hotCityCellHeight = 0;
     if (!hotcity) {
         hotcity = [[HotCityTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HotCitycell"];
         [hotcity requireHotCityname:^(NSString *cityName) {
-            _block(cityName);
+            _resultBlock(cityName);
         }];
     }
 }
@@ -251,7 +251,7 @@ static float hotCityCellHeight = 0;
         if (indexPath.section == 0) {
             if (locationTag) {
                 cityName = self.locationText;
-                _block(cityName);
+                [self resultSelectedCityName:cityName];
             }
             return;
         }else
@@ -262,7 +262,7 @@ static float hotCityCellHeight = 0;
         }
     }
     //返回选择城市
-    _block(cityName);
+    [self resultSelectedCityName:cityName];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -400,10 +400,18 @@ static float hotCityCellHeight = 0;
     return [tableview isEqual:self.searchDisplayController.searchResultsTableView];
 }
 
-#pragma -mark- block
-- (void)selectedCityName:(SelectedCityBolck)block
+#pragma -mark- result city data 
+
+- (void)resultSelectedCityName:(NSString *)cityName
 {
-    _block = [block copy];
+    if (_resultBlock)
+        _resultBlock(cityName);
+}
+
+#pragma -mark- block
+- (void)resultCityName:(ResultCityBolck)block
+{
+    _resultBlock = block;
 }
 
 - (void)didReceiveMemoryWarning

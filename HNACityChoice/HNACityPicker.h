@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol CityPickerDelegate;
+typedef void (^selectedCityBolck)(NSString *city);
+
 @interface HNACityPicker : UINavigationController
 
-@property (nonatomic,weak)id<CityPickerDelegate>cityDelegate;
 @property (nonatomic,strong)UIColor *backgroundColor;
 @property (nonatomic,strong)NSMutableArray *collectionDats;
-@end
 
-
-@protocol CityPickerDelegate
-- (void)selectedCityisName:(NSString *)cityName;
+- (void)selectedCityisName:(selectedCityBolck)block;
 @end

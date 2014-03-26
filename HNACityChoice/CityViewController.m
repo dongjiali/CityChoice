@@ -32,7 +32,9 @@
     self.view.backgroundColor = [UIColor yellowColor];
     // Do any additional setup after loading the view.
     HNACity = [[HNACityPicker alloc]init];
-    HNACity.cityDelegate = self;
+    [HNACity selectedCityisName:^(NSString *city) {
+        citylabel.text = city;
+    }];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(100, 100, 100, 100);
     [button setTitle:@"选择城市" forState:0];
@@ -45,11 +47,6 @@
     citylabel.textColor = [UIColor blackColor];
     [self.view addSubview:citylabel];
 
-}
-
-- (void)selectedCityisName:(NSString *)cityName
-{
-    citylabel.text = cityName;
 }
 
 - (void)selectdate:(id)sender

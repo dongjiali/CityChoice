@@ -213,7 +213,7 @@ const CGFloat CityButtonHeight = 40.0f;
 {
     reloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [reloadButton setTitle:@"重 试" forState:UIControlStateNormal];
-    [reloadButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [reloadButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     reloadButton.frame = CGRectMake(230, 0, 60, self.frame.size.height);
     reloadButton.hidden = YES;
     [reloadButton addTarget:self action:@selector(startLocationManager) forControlEvents:UIControlEventTouchUpInside];

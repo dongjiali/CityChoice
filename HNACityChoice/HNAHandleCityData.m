@@ -21,7 +21,7 @@
     }else
     {
         cityFileName = @"cityjson";
-         self.arrayHotCity = [NSMutableArray arrayWithArray: @[@"纽约",@"旧金山",@"东京",@"釜山",@"新加坡",@"柏林"]];
+         self.arrayHotCity = [NSMutableArray arrayWithArray: @[@"阿布扎比",@"阿拉木图",@"柏林",@"巴黎奥利",@"布鲁塞尔",@"波士顿",@"冲绳",@"赤塔",@"多伦多",@"釜山",@"罗安达",@"曼谷",@"马累",@"莫斯科",@"普吉",@"圣彼得堡",@"苏黎世",@"新加坡",@"西雅图",@"伊尔库茨克",@"芝加哥"]];
             self.searchText = @"旧/旧金山/San/San Francisco";
     }
     NSString *filePath = [[NSBundle mainBundle]pathForResource:cityFileName ofType:@"txt"];

@@ -18,7 +18,7 @@ typedef enum CityTypeMode
 
 @property (nonatomic ,strong)NSString *searchText;
 @property (nonatomic ,strong)NSMutableArray *storeCities;  //存放所有封装好的城市信息
-@property (nonatomic ,strong)NSMutableArray * sectionHeadsKeys;//存放所有城市的开头字母，相同剔除
+@property (nonatomic ,strong)NSMutableArray *sectionHeadsKeys;//存放所有城市的开头字母，相同剔除
 @property (nonatomic ,strong)NSMutableArray *arrayForArrays;   //存放所有按字母分组好的城市信息
 @property (nonatomic ,strong)NSMutableArray *arrayHotCity;   //存放所有按字母分组好的城市信息
 - (void)cityDataDidHandled:(CityTypeMode)cityTypeMode;//数组存三个数组，第一个存放所有的字母，第二个存分类数组,第三个数组存放所有城市信息

@@ -129,6 +129,7 @@ const CGFloat CityButtonHeight = 40.0f;
 @interface LocationCityTableViewCell()
 {
    UIButton *reloadButton;
+    BOOL locatTag;
 }
 
 @end
@@ -153,6 +154,7 @@ const CGFloat CityButtonHeight = 40.0f;
 - (void)startLocationManager
 {
     self.textLabel.text = @"开始定位...";
+    locatTag = NO;
     reloadButton.hidden = YES;
     if (!self.locationManager) {
         //开始定位
@@ -237,10 +239,17 @@ const CGFloat CityButtonHeight = 40.0f;
              self.textLabel.text = city;
              _blocklocation(city,YES);
              reloadButton.hidden = YES;
+             locatTag = YES;
          }
          if (error == nil && [array count] == 0)
          {
              NSString *locationText = @"定位失败,请重试";
+             _blocklocation(locationText,NO);
+             self.textLabel.text = locationText;
+             reloadButton.hidden = NO;
+         }
+         if (error != nil && !locatTag) {
+             NSString *locationText = @"定位失败,请检查网络";
              _blocklocation(locationText,NO);
              self.textLabel.text = locationText;
              reloadButton.hidden = NO;
